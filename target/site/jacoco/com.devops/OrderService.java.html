@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">orders-app</a> &gt; <a href="index.source.html" class="el_package">com.devops</a> &gt; <span class="el_source">OrderService.java</span></div><h1>OrderService.java</h1><pre class="source lang-java linenums">package com.devops;
+
+// Class that provides services related to orders
+public class OrderService {
+
+    /**
+     * Calculates the final total of an order based on:
+     * - subtotal: base amount of the products
+     * - applyDiscount: whether a discount should be applied
+     * - expressShipping: whether express shipping is selected
+     *
+     * @param subtotal base amount before discount and shipping
+     * @param applyDiscount flag that activates a 10% discount
+     * @param expressShipping flag that chooses express (20.0) or regular (10.0) shipping
+     * @return total cost after applying discount and shipping
+     */
+
+   
+    private DiscountService discountService;
+<span class="fc" id="L20">    public OrderService (DiscountService discountService){</span>
+<span class="fc" id="L21">    this.discountService = discountService ;</span>
+<span class="fc" id="L22">    }</span>
+
+    public double calculateTotal(double subtotal, boolean applyDiscount, boolean expressShipping, String discountCode) {
+    
+<span class="fc" id="L26">        double discount = discountService.getRate(discountCode);</span>
+    
+        // Apply 10% discount if requested, otherwise no discount
+      //  double discountRate = applyDiscount ? 0.1 : 0;
+<span class="fc bfc" id="L30" title="All 2 branches covered.">double discountRate = applyDiscount ? discount : 0;</span>
+        // Shipping cost: 20.0 for express, 10.0 for regular
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        double shippingCost = expressShipping ? 20.0 : 10.0;</span>
+
+        // Final total: subtract discount from subtotal, then add shipping
+<span class="fc" id="L35">        return (subtotal * (1 - discountRate)) + shippingCost;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

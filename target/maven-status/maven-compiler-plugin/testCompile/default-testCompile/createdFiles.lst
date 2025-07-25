@@ -1,1 +1,3 @@
 com\devops\AppTest.class
+com\devops\OrderServiceTest.class
+com\devops\OrderServiceMockTest.class
